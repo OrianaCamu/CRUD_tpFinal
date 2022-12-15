@@ -1,3 +1,8 @@
+<?php
+session_start ();
+require "conexiones.php";
+?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -17,6 +22,52 @@
                     <a href="index.php" class="btn btn-danger float-end">Regresar</a>
                     </h4>
                   </div>
+                     <div class="card-body">
+                        <form action="guardar.php" method= "post">
+                            <div class="mb-3">
+                                <label for="">Nombre medico</label>
+                                <input type="text" name="nombre" class= "form-control">
+            
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Apellido medico</label>
+                                <input type="text" name="apellido" class= "form-control">
+            
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Edad medico</label>
+                                <input type="number" name="edad" class= "form-control">
+            
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Especialidad medico</label>
+                                <input type="text" name="especialidad" class= "form-control">
+            
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Pais medico</label>
+                                <select name="" id="" class="form-select">
+                                    <option value="">Seleccione un pais</option>
+                                    <?php
+                                       $res = $conexion->query("SELECT * FROM `paises`order by nombre");
+                                       while ($fila = $res->fetch_object()){
+                                    ?> 
+
+                                        <?php
+                                       }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                               <button type="submit" name= "btnGuardar" class="btn btn-primary">Guardar medico</button>
+                               
+                            </div>
+
+
+                        </form>
+
+                     </div>
+
 
                 </div>
             </div>
