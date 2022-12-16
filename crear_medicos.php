@@ -52,13 +52,13 @@ require "conexion.php";
 
                   <div class="mb-3">
                        <label for="">Pais</label>
-                          <select name=" " id=" " class="form-select">
+                          <select name="pais" id=" " class="form-select">
                             <option value="">Seleccione un pais </option>
                             <?php
                                $res= $conexion->query("SELECT * FROM `paises` order by nombre");
                                while ($fila = $res->fetch_object()){
                                 ?>
-                                <option value="<?php echo $fila->id; ?>"><?php echo $fila->nombre; ?>- <?php echo $fila->iso; ?> </option>
+                                <option value="<?php echo $fila->id; ?>"><?php echo $fila->nombre; ?> </option>
                             <?php
 
                                }
