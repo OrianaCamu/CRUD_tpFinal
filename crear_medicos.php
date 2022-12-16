@@ -15,6 +15,28 @@ require "conexion.php";
   </head>
   <body>
      <div class="container">
+          <?php
+          if (isset($_SESSION['mensaje'])){
+              if (!$_SESSION['error']){
+                    ?>
+                    <div class="alert alert-success" role="alert">
+                    <?php echo $_SESSION['mensaje'];?>
+                    </div>
+              <?php
+              }else{
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                    <?php echo $_SESSION['mensaje'];?>
+                    </div>
+              <?php
+              }
+              unset($_SESSION['mensaje']);
+          }
+          ?>
+
+
+
+
        <div class="row">
         <div class="col-md-12">
            <div class="card">
