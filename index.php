@@ -46,7 +46,7 @@ require "conexion.php";
             <div class="card-header">
                 <h4>
                     Lista de Profesionales
-                    <a href="index.php" class="btn btn-success float-end">Agregar nuevo</a>
+                    <a href="crear_medicos.php" class="btn btn-success float-end">Agregar nuevo</a>
                 </h4>
             </div>
                <div class="card-body">
@@ -62,16 +62,22 @@ require "conexion.php";
                            <th>acciones</th>
                         </tr>
                         <?php
-                               $res= $conexion->query("SELECT * FROM `medicos`");
+                               $res= $conexion->query("SELECT M.*, P.nombre as pais FROM `medicos` M INNER JOIN paises P ON P.id=M.id_pais;");
                                while ($fila = $res->fetch_object()){
                                 ?>
                                  <tr>
-                          <td><?php echo $fila->id; ?>/td>
-                          <td><?php echo $fila->nombre; ?>/td>
-                          <td><?php echo $fila->apellido; ?>/td>
+                          <td><?php echo $fila->id; ?></td>
+                          <td><?php echo $fila->nombre; ?></td>
+                          <td><?php echo $fila->apellido; ?></td>
                           <td><?php echo $fila->edad; ?></td>
-                          <td><?php echo $fila->especialidad; ?>/td>
-                          <td><?php echo $fila->pais; ?>/td>
+                          <td><?php echo $fila->especialidad; ?></td>
+                          <td><?php echo $fila->pais; ?></td>
+                          <td>
+                            <a href="editar_medicos.php" class="btn btn-primary">
+                              Editar
+                               </a>
+                      
+                          </td>
                         </tr>
                               
                             <?php
