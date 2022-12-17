@@ -34,6 +34,7 @@ require "conexion.php";
               <?php
               }
               unset($_SESSION['mensaje']);
+              unset($_SESSION['error']);
           }
           ?>
 
@@ -73,7 +74,7 @@ require "conexion.php";
                           <td><?php echo $fila->especialidad; ?></td>
                           <td><?php echo $fila->pais; ?></td>
                           <td>
-                            <a href="editar_medicos.php" class="btn btn-primary">
+                            <a href="editar_medicos.php?id=<?php echo md5($fila->id); ?>" class="btn btn-primary">
                               Editar
                                </a>
                       

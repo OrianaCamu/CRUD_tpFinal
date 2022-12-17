@@ -16,6 +16,23 @@ require "conexion.php";
   <body>
      <div class="container">
           <?php
+        if(isset($_GET['id'])){
+         $id = mysqli_real_escape_string($conexion,$_GET['id']);
+         $sql = "SELECT * FROM medicos WHERE id='$id'";
+         $res = $conexion->query ($sql);
+         if ($res ->num_rows>0){
+           
+         }else{
+            $_SESSION['mensaje']= "No existe el medico";
+            $_SESSION['error']=true;
+            header("location:index.php");
+         }
+        }
+
+
+
+
+
           if (isset($_SESSION['mensaje'])){
               if (!$_SESSION['error']){
                     ?>
@@ -41,8 +58,7 @@ require "conexion.php";
         <div class="col-md-12">
            <div class="card">
             <div class="card-header">
-                <h4>
-                    Registrar medico
+                <h4>Editar medico
                     <a href="index.php" class="btn btn-danger float-end">Regresar</a>
                 </h4>
             </div>
