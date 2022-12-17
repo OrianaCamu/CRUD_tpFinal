@@ -18,7 +18,7 @@ require "conexion.php";
           <?php
             if (isset($_GET['id'])){
                $id = mysqli_real_escape_string($conexion,$_GET['id']);
-               $sql = "SELECT * FROM medicos WHERE md5(id)='$id'";
+               $sql = "SELECT M.*, P.nombre as pais FROM `medicos` M INNER JOIN paises P ON P.id= M.id_pais WHERE md5(M.id)='$id'";
                $res = $conexion->query($sql);
                if($res->num_rows>0){
                   $datos = $res->fetch_object();
@@ -75,59 +75,31 @@ require "conexion.php";
                 <form action ="guardar.php" method ="post">
                   <input type="hidden" name="id" value="<?php echo $id;?>">
                   <div class="mb-3">
-                        <label for="">Nombre medico</label>
-                        <input type = "text" name= "nombre" class= "form-control"value="<?php echo $datos->nombre;?>">
+                        <label for=""><b>Nombre:</b></label>
+                        <?php echo $datos->nombre;?>
+                  </div>
+
+                  <div class="mb-3">
+                        <label for=""><b>Apellido:</b></label>
+                       <?php echo $datos->apellido;?>
+                  </div>
+
+                  <div class="mb-3">
+                        <label for=""><b>Edad:</b></label>
+                        <?php echo $datos->edad;?> años
+                  </div>
+
+                  <div class="mb-3">
+                       <label for=""><b>Especialidad:</b></label>
+                       <?php echo $datos->especialidad;?>
                   
                   </div>
 
                   <div class="mb-3">
-                        <label for="">Apellido medico</label>
-                        <input type = "text" name= "apellido" class= "form-control" value="<?php echo $datos->apellido;?>">
-                  
+                       <label for=""><b>Pais:</b></label>
+                       <?php echo $datos->pais; ?>
+                          
                   </div>
-
-                  <div class="mb-3">
-                        <label for="">Edad medico</label>
-                        <input type = "number" name= "edad" class= "form-control"value="<?php echo $datos->edad;?>">
-                  
-                  </div>
-
-                  <div class="mb-3">
-                       <label for="">Especialidad medico</label>
-                       <input type = "text" name= "especialidad" class= "form-control"value="<?php echo $datos->especialidad;?>">
-                  
-                  </div>
-
-                  <div class="mb-3">
-                       <label for="">Pais</label>
-                          <select name="pais" id=" " class="form-select">
-                            <option  value="">Seleccione un pais </option>
-                            <?php
-                               $res= $conexion->query("SELECT * FROM `paises` order by nombre");
-                               while ($fila = $res->fetch_object()){
-                                ?>
-                                <option <?php if($fila->id==$datos->id_pais){echo "  selected";} ?> value="<?php echo $fila->id; ?>"><?php echo $fila->nombre; ?> </option>
-                            <?php
-
-                               }
-
-                            ?>
-
-
-                          </select>
-                  </div>
-
-                  <div class="mb-3">
-                     <button type= "submit" name="btnActualizar" class="btn btn-warning"> Guardar cambios </button>
-                  
-                  </div>
-
-
-
-
-
-
-
                 </form>
                </div>
            </div>

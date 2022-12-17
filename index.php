@@ -62,7 +62,7 @@ require "conexion.php";
                     
                   </tr>
                   <?php
-                               $res= $conexion->query("SELECT M.*, P.nombre as pais FROM `medicos` M INNER JOIN paises P ON P.id= M.id_pais;");
+                               $res= $conexion->query("SELECT M.*, P.nombre as pais FROM `medicos` M INNER JOIN paises P ON P.id= M.id_pais");
                                while ($fila = $res->fetch_object()){
                                 ?>
                               <tr>
@@ -76,6 +76,16 @@ require "conexion.php";
                                    <a href="editar_medicos.php?id=<?php echo md5($fila->id); ?>" class="btn btn-primary">
                                     Editar
                                    </a>
+                                   <a href="detalle_medicos.php?id=<?php echo md5($fila->id); ?>" class="btn btn-success">
+                                    Ver
+                                   </a>
+
+                                   <form action="guardar.php" method= POST class= "d-inline">
+                                    <button class= "btn btn-danger" type= "submit" name= "btnEliminar" value="=<?php echo md5($fila->id); ?>" >
+                                      Eliminar
+                                    </button>
+                                   </form>
+                               
                                
                                  </td>
                               </tr>
