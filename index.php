@@ -43,67 +43,50 @@ require "conexion.php";
            <div class="card">
             <div class="card-header">
                 <h4>
-                    Registrar medico
-                    <a href="index.php" class="btn btn-danger float-end">Regresar</a>
+                    Lista de Profesionales
+                    <a href="crear_medicos.php" class="btn btn-success float-end">Agregar nuevo</a>
                 </h4>
             </div>
                <div class="card-body">
-                <form action ="guardar.php" method ="post">
-                  <div class="mb-3">
-                        <label for="">Nombre medico</label>
-                        <input type = "text" name= "nombre" class= "form-control">
-                  
-                  </div>
-
-                  <div class="mb-3">
-                        <label for="">Apellido medico</label>
-                        <input type = "text" name= "apellido" class= "form-control">
-                  
-                  </div>
-
-                  <div class="mb-3">
-                        <label for="">Edad medico</label>
-                        <input type = "number" name= "edad" class= "form-control">
-                  
-                  </div>
-
-                  <div class="mb-3">
-                       <label for="">Especialidad medico</label>
-                       <input type = "text" name= "especialidad" class= "form-control">
-                  
-                  </div>
-
-                  <div class="mb-3">
-                       <label for="">Pais</label>
-                          <select name="pais" id=" " class="form-select">
-                            <option value="">Seleccione un pais </option>
-                            <?php
-                               $res= $conexion->query("SELECT * FROM `paises` order by nombre");
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO</th>
+                    <th>EDAD</th>
+                    <th>ESPECIALIDAD</th>
+                    <th>PAIS</th>
+                    <th>ACCIONES</th>
+                    
+                  </tr>
+                  <?php
+                               $res= $conexion->query("SELECT M.*, P.nombre as pais FROM `medicos` M INNER JOIN paises P ON P.id= M.id_pais;");
                                while ($fila = $res->fetch_object()){
                                 ?>
-                                <option value="<?php echo $fila->id; ?>"><?php echo $fila->nombre; ?> </option>
-                            <?php
+                              <tr>
+                                 <td><?php echo $fila->id; ?></td>
+                                 <td><?php echo $fila->nombre; ?></td>
+                                 <td><?php echo $fila->apellido; ?></td>
+                                 <td><?php echo $fila->edad; ?></td>
+                                 <td><?php echo $fila->especialidad; ?></td>
+                                 <td><?php echo $fila->pais; ?></td>
+                                 <td>
+                                   <button class="btn btn-primary">
+                                    Editar
+                                   </button>
+                               
+                                 </td>
+                              </tr>
+                              
+                              <?php
 
                                }
 
                             ?>
-
-
-                          </select>
-                  </div>
-
-                  <div class="mb-3">
-                     <button type= "submit" name="btnGuardar" class="btn btn-primary"> Guardar medico </button>
-                  
-                  </div>
-
-
-
-
-
-
-
-                </form>
+                 
+                </thead>
+              </table>
                </div>
            </div>
         </div>
